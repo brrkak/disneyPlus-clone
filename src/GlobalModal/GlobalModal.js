@@ -3,11 +3,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { closeModal, selectModal } from '../redux/Slice/modalSlice'
 import LoginPage from '../pages/LoginPage'
 import styled from 'styled-components'
+import "./GlobalModal.css"
+import SignUpPage from '../pages/SignUpPage'
 
 const MODAL_COMPONENTS = [
     {
         type: "LoginModal",
         component: <LoginPage />
+    },
+    {
+        type: "SignUpModal",
+        component: <SignUpPage />
     }
 ]
 
@@ -34,16 +40,21 @@ function GlobalModal() {
 }
 
 const Container = styled.div`
+position: fixed;
 width: 500px;
 height: 500px;
-background-color: skyblue;`
+background-color: skyblue;
+left: 200px;
+right: 200px;
+z-index: 1;`
 
 const Overlay = styled.div`
 position: relative;
-left: 50px;
+left: 150px;
 top: 250px;
 width: 50px;
 height: 50px;
-background-color: black;`
+background-color: black;
+z-index: 1;`
 
 export default GlobalModal;

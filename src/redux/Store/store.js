@@ -3,8 +3,10 @@ import storage from "redux-persist/lib/storage";
 import { configureStore } from "@reduxjs/toolkit"
 import persistStore from "redux-persist/es/persistStore";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from "redux-persist";
-import modalSlice from "../Slice/modalSlice";
-import loginSlice from "../Slice/loginSlice"
+import modalSlice from "../../redux/Slice/modalSlice";
+import signUpSlice from "../Slice/profileSlice";
+import loginSlice from "../Slice/loginSlice";
+
 const persistConfig = {
     key: "root",
     storage,
@@ -12,7 +14,9 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     modal: modalSlice,
+    profile: signUpSlice,
     login: loginSlice,
+
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -21,6 +25,8 @@ const store = configureStore({
     reducer: {
         persistedReducer,
     },
+    devTools: process.env.NODE_ENV !== "production",
+
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware({
             serializableCheck: {

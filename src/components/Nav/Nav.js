@@ -2,10 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LoginPage from "../../pages/LoginPage";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../redux/Slice/modalSlice";
+import { memoLoginAuthSelector, memoLogoutSelector } from "../../redux/Selector/memoSelectors";
+import { logout } from "../../redux/Slice/loginSlice";
 
 const Nav = () => {
+  const authSelector = useSelector(memoLoginAuthSelector)
+  const logoutSelector = useSelector(memoLogoutSelector)
   const [show, setShow] = useState(false);
   // 창전환
   const { pathname } = useLocation();
@@ -53,6 +57,10 @@ const Nav = () => {
       })
     )
   }
+  const toggleLogout = () => {
+    dispatch(logout(logoutSelector))
+    console.log(logoutSelector);
+  }
 
   return (
     <Container>
@@ -66,7 +74,7 @@ const Nav = () => {
           />
         </Logo>
         {pathname === "/" ? (
-          <Login onClick={handleOpenLoginModal}>Login</Login>
+          <div>{authSelector ? <Login onClick={toggleLogout}>Logout</Login> : <Login onClick={handleOpenLoginModal}>Login</Login>} </div>
         ) : (
           <Input
             value={searchValue}
