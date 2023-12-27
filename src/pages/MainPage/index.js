@@ -4,7 +4,6 @@ import Category from "../../components/Category/Category";
 import Row from "../../components/Row/Row";
 import requests from "../../api/request";
 import styled from "styled-components";
-import ProfilePage from "../ProfilePage";
 import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {

@@ -4,26 +4,26 @@ const commonSelector = state => state.persistedReducer
 
 export const memoLoginSelector = createSelector(
     [commonSelector],
-    (commonSelector) => commonSelector.profile
+    (commonSelector) => commonSelector.login
 )
 
 export const memoIdSelector = createSelector(
     [commonSelector],
-    (commonSelector) => commonSelector.profile.id
+    (commonSelector) => commonSelector.login.id
 );
 
 export const memoNameSelector = createSelector(
     [commonSelector],
-    (commonSelector) => commonSelector.profile.name
+    (commonSelector) => commonSelector.login.name
 )
 export const memoNumberSelector = createSelector(
     [commonSelector],
-    (commonSelector) => commonSelector.profile.number
+    (commonSelector) => commonSelector.login.number
 )
 
 export const memoPwSelector = createSelector(
     [commonSelector],
-    (commonSelector) => commonSelector.profile.pw
+    (commonSelector) => commonSelector.login.pw
 );
 
 export const memoUserInfoSelector = createSelector(
@@ -33,7 +33,7 @@ export const memoUserInfoSelector = createSelector(
 
 export const memoLogoutSelector = createSelector(
     [commonSelector],
-    commonSelector => commonSelector.profile
+    commonSelector => commonSelector.login
 )
 
 export const memoLoginAuthSelector = createSelector(

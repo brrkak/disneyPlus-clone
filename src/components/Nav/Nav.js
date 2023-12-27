@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import LoginPage from "../../pages/LoginPage";
 import { useDispatch, useSelector } from "react-redux";
-import { openModal } from "../../redux/Slice/modalSlice";
+// import { openModal } from "../../redux/Slice/modalSlice";
 import { memoLoginAuthSelector, memoLogoutSelector } from "../../redux/Selector/memoSelectors";
 import { logout } from "../../redux/Slice/loginSlice";
 
@@ -49,14 +48,14 @@ const Nav = () => {
     navigate(`/search?q=${e.target.value}`);
   };
 
-  const handleOpenLoginModal = () => {
-    dispatch(
-      openModal({
-        modalType: "LoginModal",
-        isOpen: true,
-      })
-    )
-  }
+  // const handleOpenLoginModal = () => {
+  //   dispatch(
+  //     openModal({
+  //       modalType: "LoginModal",
+  //       isOpen: true,
+  //     })
+  //   )
+  // }
   const toggleLogout = () => {
     dispatch(logout(logoutSelector))
     console.log(logoutSelector);
@@ -73,9 +72,7 @@ const Nav = () => {
             onClick={() => (window.location.href = "/")}
           />
         </Logo>
-        {pathname === "/" ? (
-          <div>{authSelector ? <Login onClick={toggleLogout}>Logout</Login> : <Login onClick={handleOpenLoginModal}>Login</Login>} </div>
-        ) : (
+        {pathname === "/main" ? (
           <Input
             value={searchValue}
             onChange={handleChange}
@@ -83,7 +80,10 @@ const Nav = () => {
             type="text"
             placeholder="검색해주세요"
           ></Input>
+        ) : (
+          null
         )}
+        <div>{authSelector ? <Login onClick={toggleLogout}>Logout</Login> : <Login onClick={() => navigate("/login")}>Login</Login>} </div>
       </NavWrapper>
 
     </Container>

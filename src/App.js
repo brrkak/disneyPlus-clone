@@ -1,10 +1,16 @@
 import "./App.css";
-import { Outlet, Route, Routes } from "react-router-dom";
+import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import Nav from "./components/Nav/Nav";
 import ProfilePage from "./pages/ProfilePage";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { authAsync } from "./redux/Slice/loginSlice";
+import LoginPage from "./pages/LoginPage";
+import SignUpPage from "./pages/SignUpPage";
+import { memoLoginAuthSelector } from "./redux/Selector/memoSelectors";
 
 const Layout = () => {
   return (
@@ -16,11 +22,22 @@ const Layout = () => {
   );
 };
 
+
 function App() {
+  // const authSelector = useSelector(memoLoginAuthSelector);
+  // const navigate = useNavigate()
+  // const dispatch = useDispatch();
+  // const [errorMg, setErrorMg] = useState("");
+
+
+
+
   return (
     <div className="app">
       <Routes>
         <Route path="/" element={<Layout />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="login/signup" element={<SignUpPage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="main" element={<MainPage />} />
           <Route path=":movieId" element={<DetailPage />} />
