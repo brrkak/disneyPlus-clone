@@ -1,120 +1,52 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import {
-  memoIdSelector,
-  memoLoginAuthSelector,
-  memoPwSelector,
-  memoUserInfoSelector
-} from "../../redux/Selector/memoSelectors"
-import { auth, authAsync, login } from "../../redux/Slice/loginSlice"
-import { closeModal, openModal } from "../../redux/Slice/modalSlice";
-
-
-
+import { loginEmail, signupEmail } from "../../firebase";
 const LoginPage = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
-  const idSelector = useSelector(memoIdSelector);
-  const pwSelector = useSelector(memoPwSelector);
-  const userInfoSelector = useSelector(memoUserInfoSelector);
-  const authSelector = useSelector(memoLoginAuthSelector)
-  const passwordRef = useRef(null)
+  const button = document.getElementById(`login-btn`)
 
-  const [id, setId] = useState("")
-  const [pw, setPw] = useState("")
-  const [errorMg, setErrorMg] = useState("")
-  const [isShowPwChecked, setShowPwChecked] = useState(false)
-
-  console.log(userInfoSelector[0]);
-  console.log(authSelector);
-
-  // useEffect(() => {
-  //   dispatch(authAsync())
-  //     .then((response) => {
-  //       console.log("###response", response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setErrorMg("###ERROR", error.message)
-  //     })
-
-  // }, [dispatch])
-
-
-  const toggleLogin = (e) => {
+  buttons.addEventListener('click', (e) => {
     e.preventDefault();
-
-    if (!id || !pw) {
-      alert("내용을 입력하세요.")
-      return;
+    if (e.target.id == 'signin') {
+      loginEmail(email.value, pw.value).then((result) => {
+        console.log(result);
+        const user = result.user;
+        loginSuccess(user.email, user.uid);
+      });
+    } else if (e.target.id == 'signup') {
+      signupEmail(email.value, password.value) //
+        .then((result) => {
+          const user = result.user;
+          loginSuccess(user.email, user.uid);
+        })
+        .catch((error) => console.log(error));
     }
-
-    const meta = {
-      id: id,
-      pw: pw,
-    };
-
-    dispatch(login(meta))
-    dispatch(auth())
-    if (authSelector === true) {
-      console.log("true");
-      navigate("/main")
-    } else {
-      console.log("false");
-      navigate("/")
-    }
-
-  }
-
-
-
-  // const handleOpenSignUpModal = () => {
-  //   dispatch(
-  //     openModal({
-  //       modalType: "SignUpModal",
-  //       isOpen: true,
-  //     })
-  //   )
-  // }
-
-  const handleShowPwChecked = () => {
-    const password = passwordRef.current
-    if (password == null) return
-
-    setShowPwChecked(!isShowPwChecked)
-    if (!isShowPwChecked) {
-      password.type = `text`;
-    } else {
-      password.type = `password`
-    }
-  }
-
-
-  console.log(`id: ${idSelector}`, `pw: ${pwSelector}`, userInfoSelector);
-
+  });
+  //로그인 성공시 UI 변경
+  const loginSuccess = (email, uid) => {
+    const login_area = document.getElementById('login-area');
+    login_area.innerHTML = `<h2>Login 성공!</h2><div>uid: ${uid}</div><div>email: ${email}</div>`;
+  };
   return (
     <Container>
       <h1>로그인</h1>
-      <form onSubmit={(e) => toggleLogin(e)}>
+      <form>
         <div className="login-id">
           <div>
             <input type="id" placeholder="아이디를 입력하세요"
-              value={id} maxLength={16} onChange={(e) => setId(e.target.value)} />
+            />
           </div>
         </div>
         <div className="login-pw">
           <input type="password" placeholder="비밀번호를 입력하세요"
-            value={pw} ref={passwordRef} onChange={(e) => setPw(e.target.value)} />
+          />
         </div>
         <label>
-          <input type="checkbox" onChange={handleShowPwChecked} />
+          <input type="checkbox" />
           <span className="show_pw_title">비밀번호 보기</span>
         </label>
         <div className="login-btn">
-          <button id="login-btnId" onSubmit={(e) => toggleLogin(e)}>로그인</button>
+          <button id="login-btnId">로그인</button>
         </div>
       </form>
       <div className="IdPwBtn">

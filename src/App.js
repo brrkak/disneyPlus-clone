@@ -1,16 +1,14 @@
 import "./App.css";
-import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { Outlet, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import Nav from "./components/Nav/Nav";
 import ProfilePage from "./pages/ProfilePage";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { authAsync } from "./redux/Slice/loginSlice";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import { memoLoginAuthSelector } from "./redux/Selector/memoSelectors";
+
+
 
 const Layout = () => {
   return (
