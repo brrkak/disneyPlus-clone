@@ -1,5 +1,5 @@
 import "./App.css";
-import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
@@ -11,6 +11,7 @@ import { authAsync } from "./redux/Slice/loginSlice";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import { memoLoginAuthSelector } from "./redux/Selector/memoSelectors";
+import { useGetUserInfoMutation } from "./api/apiSlice";
 
 const Layout = () => {
   return (
@@ -24,13 +25,6 @@ const Layout = () => {
 
 
 function App() {
-  // const authSelector = useSelector(memoLoginAuthSelector);
-  // const navigate = useNavigate()
-  // const dispatch = useDispatch();
-  // const [errorMg, setErrorMg] = useState("");
-
-
-
 
   return (
     <div className="app">

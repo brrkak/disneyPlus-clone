@@ -36,7 +36,7 @@ export const memoLogoutSelector = createSelector(
     commonSelector => commonSelector.login
 )
 
-export const memoLoginAuthSelector = createSelector(
-    [commonSelector],
-    (commonSelector) => commonSelector.login.isAuthenticated
-) 
+// export const memoLoginAuthSelector = createSelector(
+//     [commonSelector],
+//     (commonSelector) => commonSelector.login.isAuthenticated
+// ) 
