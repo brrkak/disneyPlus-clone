@@ -1,14 +1,60 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+const BASE_URL = 'http://localhost:3000'
 
-
-export const authAsync = createAsyncThunk(
-    "GET/AUTH",
-    async (_, thunkAPI) => {
-        const currentState = thunkAPI.getState()
-        console.log(currentState.isAuthenticated);
-        return currentState.isAuthenticated;
+export const getPosts = createAsyncThunk(
+    "GET/ALL/POSTS",
+    async (payload, thunkAPI) => {
+        try {
+            const { data } = await axios.get(`${BASE_URL}/posts`);
+            return thunkAPI.fulfillWithValue(data);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
     }
-)
+);
+
+export const addPosts = createAsyncThunk(
+    "POST_Posts",
+    async (payload, thunkAPI) => {
+        try {
+            const { data } = await axios.post(`${BASE_URL}/posts`, payload);
+            console.log("data", data);
+            return thunkAPI.fulfillWithValue(data);
+        } catch (errer) {
+            return thunkAPI.rejectWithValue(errer);
+        }
+    }
+);
+
+export const updatePosts = createAsyncThunk(
+    "UPDATAE_Posts",
+    async (payload, thunkAPI) => {
+        try {
+            console.log(payload);
+            const { data } = await axios.put(
+                `${BASE_URL}/posts/${payload.id}`,
+                payload
+            );
+            console.log("data", DataTransfer);
+            return thunkAPI.fulfillWithValue(data.data);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
+
+export const deletePosts = createAsyncThunk(
+    "DELETE_posts",
+    async (payload, thunkAPI) => {
+        try {
+            await axios.delete(`${BASE_URL}/posts/${payload}`);
+            return thunkAPI.fulfillWithValue(payload);
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
+    }
+);
 
 const initialState = {
     userInfo: [],
@@ -18,6 +64,7 @@ const initialState = {
     number: '',
     isAuthenticated: false,
     error: null,
+    isLoading: false,
 }
 
 
@@ -72,19 +119,57 @@ const loginSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(authAsync.pending, (state) => {
-            state.error = null;
+        builder.addCase(getPosts.pending, (state, action) => {
+            state.isLoading = true;
+            // state.error = null;
         });
-        builder.addCase(authAsync.fulfilled, (state, action) => {
+        builder.addCase(addPosts.pending, (state, action) => {
+            state.isLoading = true;
             state.isAuthenticated = action.payload;
         });
-        builder.addCase(authAsync.rejected, (state, action) => {
+        builder.addCase(deletePosts.rejected, (state, action) => {
             state.isAuthenticated = false;
-            state.error = action.error.message;
+            state.isLoading = true;
         });
-
+        /* Fulfilled */
+        builder.addCase(getPosts.fulfilled, (state, action) => {
+            state.isLoading = false;
+            // console.log(action)
+            state.posts = [...action.payload];
+        }),
+            builder.addCase(addPosts.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.posts.push(action.payload);
+            }),
+            builder.addCase(updatePosts.fulfilled, (state, action) => {
+                state.isLoading = false;
+                console.log(action)
+                const newState = state.posts.map((item) =>
+                    action.meta.arg.id === item.id
+                        ? { ...item, content: action.meta.arg.content }
+                        : item
+                );
+                state.posts = newState;
+                return state;
+            }),
+            builder.addCase(deletePosts.fulfilled, (state, action) => {
+                state.isLoading = false;
+                const newState = state.posts.filter(
+                    (item) => item.id !== action.meta.arg
+                );
+                state.posts = newState;
+                return state;
+            }),
+            /* Rejected */
+            builder.addCase(getPosts.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
+            })
     }
 })
+
+
+
 
 
 

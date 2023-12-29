@@ -9,8 +9,7 @@ import {
   memoUserInfoSelector
 } from "../../redux/Selector/memoSelectors"
 import { auth, authAsync, login } from "../../redux/Slice/loginSlice"
-import { closeModal, openModal } from "../../redux/Slice/modalSlice";
-
+import { token } from "../../api/auth"
 
 
 const LoginPage = () => {
@@ -30,6 +29,7 @@ const LoginPage = () => {
 
   console.log(userInfoSelector[0]);
   console.log(authSelector);
+
 
   // useEffect(() => {
   //   dispatch(authAsync())
@@ -70,15 +70,6 @@ const LoginPage = () => {
   }
 
 
-
-  // const handleOpenSignUpModal = () => {
-  //   dispatch(
-  //     openModal({
-  //       modalType: "SignUpModal",
-  //       isOpen: true,
-  //     })
-  //   )
-  // }
 
   const handleShowPwChecked = () => {
     const password = passwordRef.current
