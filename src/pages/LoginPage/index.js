@@ -8,8 +8,7 @@ import {
   memoPwSelector,
   memoUserInfoSelector
 } from "../../redux/Selector/memoSelectors"
-import { auth, authAsync, login } from "../../redux/Slice/loginSlice"
-import { closeModal, openModal } from "../../redux/Slice/modalSlice";
+import { login } from "../../redux/Slice/loginSlice"
 
 
 
@@ -25,23 +24,10 @@ const LoginPage = () => {
 
   const [id, setId] = useState("")
   const [pw, setPw] = useState("")
-  const [errorMg, setErrorMg] = useState("")
   const [isShowPwChecked, setShowPwChecked] = useState(false)
 
   console.log(userInfoSelector[0]);
   console.log(authSelector);
-
-  // useEffect(() => {
-  //   dispatch(authAsync())
-  //     .then((response) => {
-  //       console.log("###response", response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setErrorMg("###ERROR", error.message)
-  //     })
-
-  // }, [dispatch])
 
 
   const toggleLogin = (e) => {
@@ -58,27 +44,17 @@ const LoginPage = () => {
     };
 
     dispatch(login(meta))
-    dispatch(auth())
-    if (authSelector === true) {
-      console.log("true");
-      navigate("/main")
-    } else {
-      console.log("false");
-      navigate("/")
-    }
 
   }
 
+  useEffect(() => {
+    if (authSelector === true) {
+      navigate('/main')
+    } else {
+      navigate('/login')
+    }
+  }, [authSelector, navigate])
 
-
-  // const handleOpenSignUpModal = () => {
-  //   dispatch(
-  //     openModal({
-  //       modalType: "SignUpModal",
-  //       isOpen: true,
-  //     })
-  //   )
-  // }
 
   const handleShowPwChecked = () => {
     const password = passwordRef.current

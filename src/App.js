@@ -24,13 +24,31 @@ const Layout = () => {
 
 
 function App() {
-  // const authSelector = useSelector(memoLoginAuthSelector);
-  // const navigate = useNavigate()
-  // const dispatch = useDispatch();
-  // const [errorMg, setErrorMg] = useState("");
+  const authSelector = useSelector(memoLoginAuthSelector);
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const [errorMg, setErrorMg] = useState("");
+
+  useEffect(() => {
+    dispatch(authAsync())
+      .then((response) => {
+        console.log("###response", response);
+      })
+      .catch((error) => {
+        console.log(error);
+        setErrorMg("###ERROR", error.message)
+      })
+
+  }, [dispatch])
 
 
-
+  useEffect(() => {
+    if (authSelector === true) {
+      navigate("/main")
+    } else {
+      navigate("/")
+    }
+  }, [authSelector])
 
   return (
     <div className="app">

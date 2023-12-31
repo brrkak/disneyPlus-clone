@@ -11,7 +11,7 @@ const Nav = () => {
   const logoutSelector = useSelector(memoLogoutSelector)
   const [show, setShow] = useState(false);
   // 창전환
-  const { pathname } = useLocation();
+  const { pathname } = useLocation()
   //  useLocation을 통한 현재 경로나타내기
   const [searchValue, setSearchValue] = useState("");
   //  검색
@@ -33,7 +33,6 @@ const Nav = () => {
     };
   }, []);
 
-  // console.log(`useLocation`, useLocation().search);
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -48,18 +47,11 @@ const Nav = () => {
     navigate(`/search?q=${e.target.value}`);
   };
 
-  // const handleOpenLoginModal = () => {
-  //   dispatch(
-  //     openModal({
-  //       modalType: "LoginModal",
-  //       isOpen: true,
-  //     })
-  //   )
-  // }
   const toggleLogout = () => {
     dispatch(logout(logoutSelector))
     console.log(logoutSelector);
   }
+
 
   return (
     <Container>
@@ -72,7 +64,7 @@ const Nav = () => {
             onClick={() => (window.location.href = "/")}
           />
         </Logo>
-        {pathname === "/main" ? (
+        {authSelector ? (
           <Input
             value={searchValue}
             onChange={handleChange}

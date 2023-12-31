@@ -16,6 +16,7 @@ const initialState = {
     pw: '',
     name: '',
     number: '',
+    isLoading: false,
     isAuthenticated: false,
     error: null,
 }
@@ -28,7 +29,7 @@ const loginSlice = createSlice({
     initialState,
     reducers: {
         login: (state, action) => {
-            const { id, pw, number, name, isAuthenticated } = action.payload;
+            const { id, pw, number, name } = action.payload;
             const userInfo = state.userInfo;
             const user = userInfo.find(user => (user.id === id && user.pw === pw) || user.name === name || user.number === number)
 
@@ -37,9 +38,10 @@ const loginSlice = createSlice({
                 state.pw = user.pw;
                 state.name = user.name
                 state.number = user.number
-                state.isAuthenticated = isAuthenticated
+                state.isAuthenticated = true
             } else {
                 alert("비밀번호 또는 아이디가 틀립니다.")
+                state.isAuthenticated = false
             }
         },
         logout: (state) => {
@@ -67,18 +69,18 @@ const loginSlice = createSlice({
                 // 초기화면에서 다시 로그인하게 만들어야함. 
             }
         },
-        auth: (state, action) => {
-            state.isAuthenticated = action.payload
-        }
     },
     extraReducers: (builder) => {
         builder.addCase(authAsync.pending, (state) => {
+            state.isLoading = true;
             state.error = null;
         });
-        builder.addCase(authAsync.fulfilled, (state, action) => {
-            state.isAuthenticated = action.payload;
+        builder.addCase(authAsync.fulfilled, (state) => {
+            state.isLoading = false;
+
         });
         builder.addCase(authAsync.rejected, (state, action) => {
+            state.isLoading = true;
             state.isAuthenticated = false;
             state.error = action.error.message;
         });

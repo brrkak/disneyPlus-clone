@@ -5,8 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addUserInfo } from '../../redux/Slice/loginSlice';
 
-import { closeModal, openModal } from '../../redux/Slice/modalSlice';
-
 const SignUpPage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
