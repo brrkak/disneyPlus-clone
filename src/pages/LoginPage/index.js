@@ -69,7 +69,7 @@ const LoginPage = () => {
   }
 
 
-  console.log(`id: ${idSelector}`, `pw: ${pwSelector}`, userInfoSelector);
+  // console.log(`id: ${idSelector}`, `pw: ${pwSelector}`, userInfoSelector);
 
   return (
     <Container>
@@ -90,11 +90,11 @@ const LoginPage = () => {
           <span className="show_pw_title">비밀번호 보기</span>
         </label>
         <div className="login-btn">
-          <button id="login-btnId" onSubmit={(e) => toggleLogin(e)}>로그인</button>
+          <button id="login-btnId">로그인</button>
         </div>
       </form>
       <div className="IdPwBtn">
-        <button id="IdPwSearch">
+        <button onClick={() => navigate("usersearch")} id="IdPwSearch">
           ID/PW찾기
         </button>
       </div>

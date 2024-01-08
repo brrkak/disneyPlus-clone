@@ -1,14 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
-export const authAsync = createAsyncThunk(
-    "GET/AUTH",
-    async (_, thunkAPI) => {
-        const currentState = thunkAPI.getState()
-        console.log(currentState.isAuthenticated);
-        return currentState.isAuthenticated;
-    }
-)
+// export const authAsync = createAsyncThunk(
+//     "GET/AUTH",
+//     async (_, thunkAPI) => {
+//         const currentState = thunkAPI.getState()
+//         console.log(currentState);
+//     }
+// )
 
 const initialState = {
     userInfo: [],
@@ -52,43 +51,78 @@ const loginSlice = createSlice({
             state.isAuthenticated = false
         },
         userSearch: (state, action) => {
+            const { name, number } = action.payload;
+            const userInfo = state.userInfo;
+            const userSearch = userInfo.find(user => (user.name === name && user.number === number))
 
-            state.name = action.payload;
-            state.number = action.payload;
+            if (userSearch) {
+                state.name = userSearch.name;
+                state.number = userSearch.number;
+                state.error = null;
+            } else {
+                state.error = true;
+            }
+
         },
         addUserInfo: (state, action) => {
             const { name, pw, id, number } = action.payload;
             const existingUser = state.userInfo.find(user => user.id === id);
+
             if (existingUser) {
                 state.isAuthenticated = false
                 alert(`이미 사용중인 아이디입니다.`)
-                //  초기화면 전환
             } else {
                 state.userInfo = [...state.userInfo, { name, number, id, pw }]
                 alert("회원가입 완료! 다시 로그인해주세요")
-                // 초기화면에서 다시 로그인하게 만들어야함. 
             }
         },
+        delUserInfo: (state, action) => {
+            const { pw, number } = action.payload
+            const userInfo = state.userInfo;
+            const userIndex = userInfo.findIndex(user => user.pw === pw || user.number === number)
+            console.log(userIndex);
+            if (userIndex !== -1) {
+                state.userInfo.splice(userIndex, 1);
+                state.isAuthenticated = false;
+                alert("계정 삭제 완료!")
+            } else {
+                state.isAuthenticated = true;
+            }
+        },
+        profileEdit: (state, action) => {
+            const { name, pw } = action.payload
+            const userInfo = state.userInfo;
+            const userIndex = userInfo.findIndex(user => user.pw === pw)
+
+            if (userIndex !== -1) {
+                state.name = action.payload.name;
+                state.userInfo[userIndex].name = name;
+                state.error = null;
+            } else {
+                alert("비밀번호 또는 아이디가 틀립니다.")
+                state.error = true;
+            }
+        },
+
+
     },
-    extraReducers: (builder) => {
-        builder.addCase(authAsync.pending, (state) => {
-            state.isLoading = true;
-            state.error = null;
-        });
-        builder.addCase(authAsync.fulfilled, (state) => {
-            state.isLoading = false;
+    // extraReducers: (builder) => {
+    //     builder.addCase(authAsync.pending, (state, action) => {
+    //         state.isLoading = true;
 
-        });
-        builder.addCase(authAsync.rejected, (state, action) => {
-            state.isLoading = true;
-            state.isAuthenticated = false;
-            state.error = action.error.message;
-        });
+    //     });
+    //     builder.addCase(authAsync.fulfilled, (state) => {
+    //         state.isLoading = false;
+    //     });
+    //     builder.addCase(authAsync.rejected, (state, action) => {
+    //         state.isLoading = true;
+    //         state.isAuthenticated = false;
+    //     });
 
-    }
+    // }
 })
 
 
 
 export default loginSlice.reducer;
-export const { login, logout, addUserInfo, profile, auth } = loginSlice.actions;
+export const { login, logout, addUserInfo, userSearch, profileEdit, delUserInfo } = loginSlice.actions;
