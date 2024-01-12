@@ -3,7 +3,6 @@ import storage from "redux-persist/lib/storage";
 import { configureStore } from "@reduxjs/toolkit"
 import persistStore from "redux-persist/es/persistStore";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from "redux-persist";
-import modalSlice from "../../redux/Slice/modalSlice";
 import loginSlice from "../Slice/loginSlice";
 
 const persistConfig = {
@@ -12,7 +11,6 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-    modal: modalSlice,
     login: loginSlice,
 })
 

@@ -4,13 +4,12 @@ import Category from "../../components/Category/Category";
 import Row from "../../components/Row/Row";
 import requests from "../../api/request";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+
 
 const MainPage = () => {
-  const navigate = useNavigate()
+
   return (
     <Container>
-      <div onClick={() => navigate("/profile")}>프로필</div>
       <Banner />
       <Category />
       <Row title="Trending Now" id="TN" fetchUrl={requests.fetchTrending} />

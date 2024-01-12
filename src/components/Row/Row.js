@@ -43,20 +43,20 @@ const Row = ({ title, fetchUrl }) => {
         autoplay={{ delay: 10000, disableOnInteraction: false }}
         breakpoints={{
           1378: {
-            slidesPerView: 6,
-            slidesPerGroup: 6,
-          },
-          998: {
-            slidesPerView: 5,
-            slidesPerGroup: 5,
-          },
-          625: {
             slidesPerView: 4,
             slidesPerGroup: 4,
           },
-          0: {
+          998: {
             slidesPerView: 3,
             slidesPerGroup: 3,
+          },
+          625: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+          },
+          0: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
           },
         }}
         modules={[Navigation, Pagination, Scrollbar, Autoplay]}

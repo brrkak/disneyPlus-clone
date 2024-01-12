@@ -4,6 +4,7 @@ import { memoIdSelector, memoPwSelector, memoUserInfoSelector } from '../../redu
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addUserInfo } from '../../redux/Slice/loginSlice';
+import "./SignupPage.css"
 import zxcvbn from 'zxcvbn';
 
 const SignUpPage = () => {
@@ -65,7 +66,7 @@ const SignUpPage = () => {
         }
         return (
             <small id="passwordHelp" className={`${className}`}>
-                {`${message}`}
+                <span>{`${message}`}</span>
             </small>)
     }
 
@@ -74,7 +75,7 @@ const SignUpPage = () => {
         if (confirmPw) {
             if (!doesPasswordMatch()) {
                 return (
-                    <div>패스워드 불일치</div>
+                    <span>패스워드 불일치</span>
                 )
             }
         }
@@ -83,7 +84,7 @@ const SignUpPage = () => {
     const renderFeedbackProfile = () => {
         if (!doesProfileConfirm()) {
             return (
-                <div>조건에 맞게 입력하세요.</div>
+                <span>조건에 맞게 입력하세요.</span>
             )
         }
     }
@@ -112,42 +113,91 @@ const SignUpPage = () => {
 
     return (
         <Container>
-            <h1>회원 가입</h1>
-            <form onSubmit={(e) => toggleLogin(e)}>
-                <div className="login-id">
-                    <div>
-                        <input type="email" placeholder="이메일 입력"
-                            value={id} onChange={(e) => setId(e.target.value)} />
+            <img className="signUp_logo_img"
+                src="/images/logo.svg"
+                alt="Disney Plus App" />
+            <Contents>
+                <h1 className='heading_title'>회원 가입</h1>
+                <form className='signUp_container' onSubmit={(e) => toggleLogin(e)}>
+                    <div className="signUp_email">
+                        <TextInput type="text" id="email_input" name="email"
+                            value={id} onChange={(e) => setId(e.target.value)} required />
+                        <Label htmlFor="email_input"><span>이메일</span></Label>
                     </div>
-                </div>
-                <div className="login-pw">
-                    <input type="password" placeholder="패스워드 생성"
-                        value={pw} onChange={(e) => handleOnPasswordInput(e.target.value)} />
-                    <input type="password" placeholder="패스워드 확인"
-                        value={confirmPw} onChange={(e) => handleOnConfirmPasswordInput(e.target.value)} />
-                    {renderFeedbackPassWord()}
-                </div>
-                {renderFeedbackMessage()}
+                    <div className="signUp_password">
+                        <TextInput type="password" id='pw_input' name='pw'
+                            value={pw} onChange={(e) => handleOnPasswordInput(e.target.value)} required />
+                        <Label htmlFor="pw_input"><span>비밀번호</span></Label>
+                    </div>
+                    <div className="signUp_confirmPw">
+                        <TextInput type="password" id='confirmPw_input' name='confirmPw'
+                            value={confirmPw} onChange={(e) => handleOnConfirmPasswordInput(e.target.value)} required />
+                        <Label htmlFor="confirmPw_input"><span>비밀번호 확인</span></Label>
+                        {renderFeedbackPassWord()}
+                    </div>
+                    {renderFeedbackMessage()}
+                    <userinfo className="signUp_userInfo">
+                        <h2 className='heading_title'>프로필</h2>
+                        <div className="signUp_name">
+                            <TextInput type="text" placeholder="이름을 최소 두글자 이상 입력하세요."
+                                value={name} onChange={(e) => setName(e.target.value)} />
+                        </div>
+                        <div className="signUp_number">
+                            <TextInput type="number" placeholder="- 없이 휴대전화 번호를 입력하세요."
+                                value={number} onChange={(e) => setNumber(e.target.value)} />
+                        </div>
+                    </userinfo>
 
+                    {renderFeedbackProfile()}
+                    <div className='signUp_btn'>
+                        <button id='signUpEnter_btn' type='submit'>확인</button>
+                    </div>
+                </form>
+                <div className='back_btn' id='signUp_back' onClick={() => navigate("/login")}>
+                    <span className='material-symbols-outlined'></span>
+                </div>
+            </Contents>
 
-                <div className="login-name">
-                    <input type="text" placeholder="이름을 최소 두글자 이상 입력하세요."
-                        value={name} onChange={(e) => setName(e.target.value)} />
-                </div>
-                <div className="login-number">
-                    <input type="number" placeholder="- 없이 휴대전화 번호를 입력하세요."
-                        value={number} onChange={(e) => setNumber(e.target.value)} />
-                </div>
-                {renderFeedbackProfile()}
-                <div>
-                    <button type='submit'>확인</button>
-                </div>
-            </form>
-            <button onClick={() => navigate("/login")}> 뒤로가기 </button>
         </Container>
     )
 }
 
 export default SignUpPage
 
-const Container = styled.div``
+const Container = styled.div`
+display: flex;
+flex-direction: column;
+justify-content : flex-start;
+min-height: calc(110vh - 250px);
+height: 100%;
+overflow-x: hidden;
+top: 72px;
+padding: 0 calc(3.5vw + 5px);
+align-items: center;
+
+
+&::after {
+    background: url("/images/login-background.png") center center / cover
+      no-repeat fixed;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0px;
+    opacity: 1;
+    z-index: -1;
+    `
+
+const Contents = styled.div`
+border-radius: 24px 24px 24px 24px;
+width: 580px;
+margin: 100px 0 0 0;
+padding: 40px 72px 80px 72px;
+background-color: #ffffff;
+position: absolute;
+top:50px;
+`
+const TextInput = styled.input``
+
+const Label = styled.label``
+

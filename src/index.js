@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./redux/Store/store"
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
-import GlobalModal from "./GlobalModal/GlobalModal"
+
 
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -16,7 +16,6 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <GlobalModal />
           <App />
         </PersistGate>
       </Provider>

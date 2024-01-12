@@ -10,3 +10,32 @@ a {
   color: #f9f9f9;
   text-decoration: none;
 }
+
+input {
+  color: #000000;
+}
+
+label {
+  color: #000000;
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  font-size: 20px;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  pointer-events: none;
+}
+
+span {
+  color: black;
+}
+
+.heading_title {
+  color: #252526;
+}
+
+.back_btn > .material-symbols-outlined::after {
+  content: "arrow_back";
+}

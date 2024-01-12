@@ -1,13 +1,12 @@
 import "./App.css";
-import { Link, Outlet, Route, Routes, useNavigate } from "react-router-dom";
+import { Outlet, Route, Routes, useNavigate } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
 import Nav from "./components/Nav/Nav";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { authAsync } from "./redux/Slice/loginSlice";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import UserSearchPage from "./pages/UserSearchPage"
@@ -28,21 +27,7 @@ const Layout = () => {
 function App() {
   const authSelector = useSelector(memoLoginAuthSelector);
   const navigate = useNavigate()
-  const dispatch = useDispatch();
-  const [errorMg, setErrorMg] = useState("");
-  const isLoadingSelector = useSelector(state => state.persistedReducer.login.isLoading)
 
-  // useEffect(() => {
-  //   dispatch(authAsync())
-  //     .then((response) => {
-  //       console.log("###response", response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //       setErrorMg("###ERROR", error)
-  //     })
-
-  // }, [dispatch])
 
 
   useEffect(() => {

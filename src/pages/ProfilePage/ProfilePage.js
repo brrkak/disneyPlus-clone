@@ -3,7 +3,7 @@ import { memoIdSelector, memoNameSelector, memoNumberSelector, memoPwSelector } 
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
-
+import "./ProfilePage.css"
 const ProfilePage = () => {
     const [show, setShow] = useState(false)
     const [pw, setPw] = useState("")
@@ -27,39 +27,92 @@ const ProfilePage = () => {
 
     return (show ?
         (<Container>
-            <h2>비밀번호를 한번 더 입력해주세요.</h2>
-            <form style={{ width: "500px" }} onSubmit={(e) => handleEditProfile(e)}>
-                <input value={pw} onChange={(e) => setPw(e.target.value)} type="text" placeholder='비밀번호를 입력하세요' />
-                <button onSubmit={(e) => handleEditProfile(e)}>확인</button>
-            </form>
-            <button onClick={() => setShow(false)}>뒤로 가기</button>
+            <Contents>
+                <h2 className='heading_title'>비밀번호를 한번 더 입력해주세요.</h2>
+                <form className='profile_passwordConfirm_container' onSubmit={(e) => handleEditProfile(e)}>
+                    <div className="profile_passwordConfirm">
+                        <TextInput id='password' name='password' value={pw} onChange={(e) => setPw(e.target.value)} type="text" required />
+                        <Label htmlFor="password"><span>비밀번호</span></Label>
+                    </div>
+                    <button className='profile_edit_btn' onSubmit={(e) => handleEditProfile(e)}>확인</button>
+                </form>
+                <div className='back_btn' id='profile_passwordConfirm_back' s onClick={() => setShow(false)}>
+                    <span className='material-symbols-outlined'></span>
+                </div>
+
+            </Contents>
+
+
         </Container>)
         : (<Container>
-            <div className="profile-name" >
-                <span>NAME </span>:
-                {nameSelector}
-            </div >
-            <div className="profile-pw">
-                <span>PW </span>:
-                {pwSelector}
-            </div>
-            <div className="profile-number">
-                <span>NUMBER </span>:
-                {numberSelector}
-            </div>
-            <div className="profile-id">
-                <span>ID </span>:
-                {idSelector}
-            </div>
-            <button onClick={() => setShow(true)}>프로필 수정</button>
+            <Contents>
+                <h1 className='heading_title'>프로필 정보</h1>
+                <Profile>
+                    <div className="profile_name" >
+                        <div className='profile_userInfo'>NAME : <span>{nameSelector}</span></div>
+                    </div >
+                    <div className="profile_number">
+                        <div className='profile_userInfo'>NUMBER : <span>{numberSelector}</span></div>
+                    </div>
+                    <div className="profile_id">
+                        <div className='profile_userInfo'>ID : <span>{idSelector}</span></div>
+                    </div>
+                </Profile>
+                <button className='profile_edit_btn' onClick={() => setShow(true)}>프로필 수정</button>
+                <div className='back_btn' id='profile_passwordConfirm_back' s onClick={() => navigate("/main")}>
+                    <span className='material-symbols-outlined'></span>
+                </div>
+            </Contents>
+
         </Container >))
 
 
 };
 
-const Container = styled.div`
-position: relative;
-left: 250px;
-top: 250px;`
+const Container = styled.main`
+display: flex;
+flex-direction: column;
+justify-content : flex-start;
+min-height: calc(110vh - 250px);
+height: 100%;
+overflow-x: hidden;
+top: 72px;
+padding: 0 calc(3.5vw + 5px);
+align-items: center;
+
+
+&::after {
+    background: url("/images/login-background.png") center center / cover
+      no-repeat fixed;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0px;
+    opacity: 1;
+    z-index: -1;
+    `
+
+const Contents = styled.div`
+
+border-radius: 24px 24px 24px 24px;
+width: 580px;
+margin: 100px 0 0 0;
+padding: 40px 72px 80px 72px;
+background-color: #ffffff;
+position: absolute;
+top:50px;
+`
+
+const Profile = styled.div`
+display: flex;
+flex-direction: column;
+background-color: #e8f0fe;
+border-radius: 10px;
+padding: 20px;`
+const TextInput = styled.input``
+
+const Label = styled.label``
+
 
 export default ProfilePage

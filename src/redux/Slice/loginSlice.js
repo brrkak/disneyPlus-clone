@@ -1,13 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 
-// export const authAsync = createAsyncThunk(
-//     "GET/AUTH",
-//     async (_, thunkAPI) => {
-//         const currentState = thunkAPI.getState()
-//         console.log(currentState);
-//     }
-// )
 
 const initialState = {
     userInfo: [],
@@ -106,20 +99,7 @@ const loginSlice = createSlice({
 
 
     },
-    // extraReducers: (builder) => {
-    //     builder.addCase(authAsync.pending, (state, action) => {
-    //         state.isLoading = true;
 
-    //     });
-    //     builder.addCase(authAsync.fulfilled, (state) => {
-    //         state.isLoading = false;
-    //     });
-    //     builder.addCase(authAsync.rejected, (state, action) => {
-    //         state.isLoading = true;
-    //         state.isAuthenticated = false;
-    //     });
-
-    // }
 })
 
 

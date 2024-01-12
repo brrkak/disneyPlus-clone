@@ -3,29 +3,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
-  memoIdSelector,
   memoLoginAuthSelector,
-  memoPwSelector,
   memoUserInfoSelector
 } from "../../redux/Selector/memoSelectors"
 import { login } from "../../redux/Slice/loginSlice"
-
+import "./LoginPage.css"
 
 
 const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const idSelector = useSelector(memoIdSelector);
-  const pwSelector = useSelector(memoPwSelector);
   const userInfoSelector = useSelector(memoUserInfoSelector);
   const authSelector = useSelector(memoLoginAuthSelector)
   const passwordRef = useRef(null)
-
   const [id, setId] = useState("")
   const [pw, setPw] = useState("")
   const [isShowPwChecked, setShowPwChecked] = useState(false)
-
+  const [visibility, setVisibility] = useState("visibility")
   console.log(userInfoSelector[0]);
   console.log(authSelector);
 
@@ -58,55 +53,102 @@ const LoginPage = () => {
 
   const handleShowPwChecked = () => {
     const password = passwordRef.current
+
     if (password == null) return
 
     setShowPwChecked(!isShowPwChecked)
     if (!isShowPwChecked) {
       password.type = `text`;
+      setVisibility("visibility_off")
     } else {
       password.type = `password`
+      setVisibility("visibility")
     }
   }
 
 
-  // console.log(`id: ${idSelector}`, `pw: ${pwSelector}`, userInfoSelector);
-
   return (
     <Container>
-      <h1>로그인</h1>
-      <form onSubmit={(e) => toggleLogin(e)}>
-        <div className="login-id">
-          <div>
-            <input type="id" placeholder="아이디를 입력하세요"
-              value={id} maxLength={16} onChange={(e) => setId(e.target.value)} />
+      <img className="login_logo_img"
+        src="/images/logo.svg"
+        alt="Disney Plus App" />
+      <Contents>
+        <h1 className="heading_title">로그인</h1>
+        <form className="login_container" onSubmit={(e) => toggleLogin(e)}>
+          <div className="login_email">
+
+            <TextInput type="text" id="email" name="email"
+              value={id} onChange={(e) => setId(e.target.value)} required />
+            <Label htmlFor="email"><span>이메일</span></Label>
+          </div>
+          <div className="login_password">
+
+            <TextInput type="password" name="password" id="password"
+              value={pw} ref={passwordRef} onChange={(e) => setPw(e.target.value)} required />
+            <Label htmlFor="password"><span>비밀번호</span></Label>
+            <div className="material-symbols-outlined" onClick={handleShowPwChecked}>{visibility}</div>
+          </div>
+          <div className="login_btn">
+            <button id="loginEnter_btn">로그인</button>
+          </div>
+        </form>
+        <div className="btn_group">
+          <div className="userSearch_btn">
+            <button onClick={() => navigate("usersearch")} id="IdPwSearch">
+              로그인에 문제가 있나요?
+            </button>
+          </div>
+          <div className="signup_btn">
+            <button onClick={() => navigate("signup")} id="signUp">
+              회원가입을 하려면 여기를 클릭하세요.
+            </button>
           </div>
         </div>
-        <div className="login-pw">
-          <input type="password" placeholder="비밀번호를 입력하세요"
-            value={pw} ref={passwordRef} onChange={(e) => setPw(e.target.value)} />
-        </div>
-        <label>
-          <input type="checkbox" onChange={handleShowPwChecked} />
-          <span className="show_pw_title">비밀번호 보기</span>
-        </label>
-        <div className="login-btn">
-          <button id="login-btnId">로그인</button>
-        </div>
-      </form>
-      <div className="IdPwBtn">
-        <button onClick={() => navigate("usersearch")} id="IdPwSearch">
-          ID/PW찾기
-        </button>
-      </div>
-      <div className="signUpBtn">
-        <button onClick={() => navigate("signup")} id="signUp">
-          회원가입
-        </button>
-      </div>
-    </Container>
+      </Contents>
+
+    </Container >
   )
 };
 
 export default LoginPage;
 
-const Container = styled.div``
+const Container = styled.main`
+display: flex;
+flex-direction: column;
+justify-content : flex-start;
+min-height: calc(110vh - 250px);
+height: 100%;
+overflow-x: hidden;
+top: 72px;
+padding: 0 calc(3.5vw + 5px);
+align-items: center;
+
+
+&::after {
+    background: url("/images/login-background.png") center center / cover
+      no-repeat fixed;
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0px;
+    opacity: 1;
+    z-index: -1;
+    `
+
+const Contents = styled.div`
+
+border-radius: 24px 24px 24px 24px;
+width: 580px;
+margin: 100px 0 0 0;
+padding: 40px 72px 80px 72px;
+background-color: #ffffff;
+position: absolute;
+top:50px;
+`
+
+const Label = styled.label``
+
+const TextInput = styled.input`
+
+  `

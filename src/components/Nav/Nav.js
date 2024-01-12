@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-// import { openModal } from "../../redux/Slice/modalSlice";
 import { memoLoginAuthSelector, memoLogoutSelector } from "../../redux/Selector/memoSelectors";
 import { logout } from "../../redux/Slice/loginSlice";
 
@@ -65,13 +64,16 @@ const Nav = () => {
           />
         </Logo>
         {authSelector ? (
-          <Input
+          <><Input
             value={searchValue}
             onChange={handleChange}
             className="nav__input"
             type="text"
             placeholder="검색해주세요"
           ></Input>
+            <div style={{ position: "fixed", right: "15%" }} onClick={() => navigate("/profile")}>프로필</div>
+          </>
+
         ) : (
           null
         )}
@@ -141,3 +143,4 @@ const Logo = styled.a`
     width: 100%;
   }
 `;
+

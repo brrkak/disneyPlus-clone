@@ -1,0 +1,74 @@
+.userSearch_name,
+.userSearch_number {
+  position: relative;
+  background-color: #e8f0fe;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  display: flex;
+  height: 50px;
+}
+
+.userSearch_container > div > input {
+  background: none;
+  width: 100%;
+  height: 50px;
+  padding: 20px 0 0 10px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+  font-size: 17px;
+  outline: none;
+}
+
+.userSearch_container > div > input:focus,
+.userSearch_container > div > input:valid {
+  transition: border-bottom 0.5s ease;
+  border-bottom: 2px solid rgb(37, 37, 38);
+}
+
+.userSearch_container > div > input:focus + label span,
+.userSearch_container > div > input:valid + label span {
+  display: block;
+  transform: translateY(-100%);
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.userSearch_container > div > input + label span,
+.userSearch_container > div > input + label span {
+  display: block;
+  transition: all 0.3s ease;
+  font-size: 20px;
+}
+
+.userSearch_userInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userSearch_userInfo > span {
+  display: block;
+  margin: 10px 0 0 0;
+}
+
+#userSearch_back {
+  position: absolute;
+  top: 0;
+  left: 15px;
+}
+#userSearchEnter_btn {
+  background-color: rgb(51 0 255);
+  color: #ffff;
+  width: 100%;
+  height: 52px;
+  padding: 14px 24px;
+  border-radius: 26px;
+  border-width: 2px;
+  border-style: solid;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  border: 0;
+  margin-top: 10px;
+}

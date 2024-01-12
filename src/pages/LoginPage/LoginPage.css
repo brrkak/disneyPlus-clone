@@ -1,0 +1,88 @@
+.login_email,
+.login_password {
+  position: relative;
+  background-color: #e8f0fe;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  display: flex;
+  height: 50px;
+}
+.login_logo_img {
+  width: 150px;
+  height: 150px;
+}
+
+.login_container > div > input {
+  background: none;
+  width: 100%;
+  height: 50px;
+  border: 0;
+  padding: 20px 0 0 10px;
+  border-bottom: 2px solid transparent;
+  box-sizing: border-box;
+  font-size: 17px;
+  outline: none;
+}
+
+.login_container > div > input:focus,
+.login_container > div > input:valid {
+  transition: border-bottom 0.5s ease;
+  border-bottom: 2px solid rgb(37, 37, 38);
+}
+
+.login_container > div > input:focus + label span,
+.login_container > div > input:valid + label span {
+  display: block;
+  transform: translateY(-100%);
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.login_container > div > input + label span,
+.login_container > div > input + label span {
+  display: block;
+  transition: all 0.3s ease;
+  font-size: 20px;
+}
+
+.material-symbols-outlined {
+  color: #252526;
+  font-size: 30px;
+  position: absolute;
+  top: 10px;
+  left: 95%;
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 48;
+}
+
+#loginEnter_btn {
+  background-color: rgb(51 0 255);
+  color: #ffff;
+  width: 100%;
+  height: 52px;
+  padding: 14px 24px;
+  border-radius: 26px;
+  border-width: 2px;
+  border-style: solid;
+  cursor: pointer;
+  outline: none;
+  box-sizing: border-box;
+  border: 0;
+  margin-top: 10px;
+}
+
+.btn_group > div > button {
+  border: 0;
+}
+
+.signup_btn {
+  position: absolute;
+  top: 20px;
+  left: 65%;
+}
+
+@media (max-width: 992px) {
+  .material-symbols-outlined {
+    top: 10px;
+    left: 80%;
+  }
+}
