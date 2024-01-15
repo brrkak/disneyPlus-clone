@@ -24,6 +24,14 @@ const LoginPage = () => {
   console.log(userInfoSelector[0]);
   console.log(authSelector);
 
+  let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+
+  let testEmails = ["aaa@aa.aa"];
+
+  testEmails.forEach((address) => {
+    console.log(regex.test(address));
+  });
+
 
   const toggleLogin = (e) => {
     e.preventDefault();
