@@ -21,12 +21,23 @@
 
 .signUp_email,
 .signUp_password,
-.signUp_confirmPw,
+.signUp_confirmPw {
+  position: relative;
+  background-color: #e8f0fe;
+  margin-bottom: 30px;
+  border-radius: 3px;
+  display: flex;
+  height: 50px;
+}
+.signUp_password {
+  margin-bottom: 10px;
+}
+
 .signUp_name,
 .signUp_number {
   position: relative;
   background-color: #e8f0fe;
-  margin-bottom: 10px;
+  margin-top: 10px;
   border-radius: 3px;
   display: flex;
   height: 50px;
@@ -76,21 +87,17 @@
   outline: none;
 }
 
-.text-danger > span {
-  color: red;
-}
-.text-warning > span {
-  color: orange;
-}
-.text-success > span {
-  color: blue;
-}
-.text-primary > span {
-  color: greenyellow;
-}
-
 #signUp_back {
   position: absolute;
   left: 15px;
   top: 0;
+}
+.signUp_confirmPw_rejcet {
+  position: absolute;
+  left: 450px;
+  top: 50px;
+}
+
+.signUp_profile_check {
+  color: red;
 }

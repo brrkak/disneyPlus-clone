@@ -39,3 +39,33 @@ span {
 .back_btn > .material-symbols-outlined::after {
   content: "arrow_back";
 }
+
+.text-danger > span {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  color: red;
+}
+.text-warning > span {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  color: orange;
+}
+.text-success > span {
+  color: blue;
+  position: absolute;
+  top: 50px;
+  left: 0;
+}
+.text-primary > span {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  color: greenyellow;
+}
+
+input[type="number"] {
+  -webkit-appearance: none;
+  margin: 0;
+}

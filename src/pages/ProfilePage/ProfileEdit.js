@@ -66,7 +66,7 @@ const ProfileEdit = () => {
                 <Contents>
                     <form className='profileDel_container' onSubmit={(e) => handleDel(e)}>
                         <div className='profileDel_number'>
-                            <TextInput type="number" id='delNumber' name='delNumber'
+                            <TextInput type="number" id='delNumber' name='delNumber' onWheel={(e) => e.target.blur()}
                                 value={number} onChange={(e) => setNumber(e.target.value)} required />
                             <Label htmlFor='delNumber'><span>- 없이 휴대전화 번호를 입력하세요.</span></Label>
                         </div>
@@ -94,6 +94,7 @@ const ProfileEdit = () => {
                             </div>
                             <div className='profileEdit_password'>
                                 <TextInput id='password' name="password" type="number"
+                                    onWheel={((e) => e.target.blur())}
                                     value={pw} onChange={(e) => setPw(e.target.value)} required />
                                 <Label htmlFor="password"><span>비밀번호를 다시 입력해주세요</span></Label>
                             </div>

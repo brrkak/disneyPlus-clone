@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { memoIdSelector, memoPwSelector, memoUserInfoSelector } from '../../redux/Selector/memoSelectors';
+import { memoUserInfoSelector } from '../../redux/Selector/memoSelectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addUserInfo } from '../../redux/Slice/loginSlice';
@@ -17,26 +17,72 @@ const SignUpPage = () => {
     const [pw, setPw] = useState("")
     const [confirmPw, setConfirmPw] = useState("")
     const [passwordScore, setPasswordScore] = useState("")
+    const infoSel = useSelector(memoUserInfoSelector)
 
+    // 이메일 입력
+    const handleOnConfrimEmail = (confirmEmailInput) => {
+        // 이메일 입력을 state로 옮김.
+        setId(confirmEmailInput)
+    }
+
+    const doesEmailMatch = () => {
+        // 이메일 유효성검사.
+        let regex = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+        return regex.test(id) === true
+    }
+
+    const renderFeedbackEmail = () => {
+        // 아이디 중복 검사
+        const emailDuplicate = infoSel.findIndex(user => user.id === id)
+
+        // 아이디  피드백
+        if ((id && emailDuplicate !== 0) || id.trim() === "") {
+            if (doesEmailMatch()) {
+                return (
+                    <small id="emailHelp" className={`text-success`}>
+                        <span>사용 가능한 아이디입니다.</span>
+                        <div className="material-symbols-outlined" id="check_success">Done</div>
+                    </small>)
+
+            }
+            else {
+                return (
+                    <small id="emailHelp" className={`text-danger`}>
+                        <span>조건에 맞게 입력해주세요.</span>
+                        <div className="material-symbols-outlined" onClick={() => setId("")} id="check_danger">Close</div>
+                    </small>)
+            }
+        }
+        return (
+            <small id="emailHelp" className={`text-danger`}>
+                <span>이미 사용중인 아이디입니다.</span>
+                <div className="material-symbols-outlined" onClick={() => setId("")} id="check_danger">Close</div>
+            </small>)
+
+
+    }
+
+    // 패스워드 입력
     const handleOnPasswordInput = (passwordInput) => {
+        // 패스워드 강도 체크
         const { score } = zxcvbn(passwordInput)
+        // 패스워드와 패스워드 강도체크를 state로 옮김
         setPw(passwordInput);
         setPasswordScore(score)
     }
 
-
+    // 패스워드 확인 입력
     const handleOnConfirmPasswordInput = (confirmPasswordInput) => {
         setConfirmPw(confirmPasswordInput);
     }
+    // 패스워드와 패스워드 확인 일치여부
     const doesPasswordMatch = () => {
         return pw === confirmPw
 
     }
-    const doesProfileConfirm = () => {
-        return (number.length < 11 || name.length < 2) === false
-    }
 
-    const renderFeedbackMessage = () => {
+    //  패스워드 확인 피드백
+    const renderFeedbackConfirmPw = () => {
         let message, className;
 
         switch (passwordScore) {
@@ -70,23 +116,28 @@ const SignUpPage = () => {
             </small>)
     }
 
-
+    // 패스워드 피드백
     const renderFeedbackPassWord = () => {
         if (confirmPw) {
             if (!doesPasswordMatch()) {
                 return (
-                    <span>패스워드 불일치</span>
+                    <span className='signUp_confirmPw_rejcet'>패스워드 불일치</span>
                 )
             }
         }
     }
 
+    // 프로필 피드백
     const renderFeedbackProfile = () => {
         if (!doesProfileConfirm()) {
             return (
-                <span>조건에 맞게 입력하세요.</span>
+                <span className='signUp_profile_check'>조건에 맞게 입력하세요.</span>
             )
         }
+    }
+    // 프로필 유효성검사
+    const doesProfileConfirm = () => {
+        return (number.length < 11 || name.length < 2) === false
     }
 
     const toggleLogin = (e) => {
@@ -121,8 +172,9 @@ const SignUpPage = () => {
                 <form className='signUp_container' onSubmit={(e) => toggleLogin(e)}>
                     <div className="signUp_email">
                         <TextInput type="text" id="email_input" name="email"
-                            value={id} onChange={(e) => setId(e.target.value)} required />
+                            value={id} onChange={(e) => handleOnConfrimEmail(e.target.value)} required />
                         <Label htmlFor="email_input"><span>이메일</span></Label>
+                        {renderFeedbackEmail()}
                     </div>
                     <div className="signUp_password">
                         <TextInput type="password" id='pw_input' name='pw'
@@ -134,8 +186,9 @@ const SignUpPage = () => {
                             value={confirmPw} onChange={(e) => handleOnConfirmPasswordInput(e.target.value)} required />
                         <Label htmlFor="confirmPw_input"><span>비밀번호 확인</span></Label>
                         {renderFeedbackPassWord()}
+                        {renderFeedbackConfirmPw()}
                     </div>
-                    {renderFeedbackMessage()}
+
                     <userinfo className="signUp_userInfo">
                         <h2 className='heading_title'>프로필</h2>
                         <div className="signUp_name">
@@ -144,11 +197,11 @@ const SignUpPage = () => {
                         </div>
                         <div className="signUp_number">
                             <TextInput type="number" placeholder="- 없이 휴대전화 번호를 입력하세요."
-                                value={number} onChange={(e) => setNumber(e.target.value)} />
+                                value={number} onWheel={(e) => e.target.blur()} onChange={(e) => setNumber(e.target.value)} />
                         </div>
+                        {renderFeedbackProfile()}
                     </userinfo>
 
-                    {renderFeedbackProfile()}
                     <div className='signUp_btn'>
                         <button id='signUpEnter_btn' type='submit'>확인</button>
                     </div>
@@ -191,6 +244,7 @@ align-items: center;
 const Contents = styled.div`
 border-radius: 24px 24px 24px 24px;
 width: 580px;
+height: 580px;
 margin: 100px 0 0 0;
 padding: 40px 72px 80px 72px;
 background-color: #ffffff;

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import {
   memoLoginAuthSelector,
-  memoUserInfoSelector
 } from "../../redux/Selector/memoSelectors"
 import { login } from "../../redux/Slice/loginSlice"
 import "./LoginPage.css"
@@ -14,24 +13,36 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const userInfoSelector = useSelector(memoUserInfoSelector);
+
   const authSelector = useSelector(memoLoginAuthSelector)
   const passwordRef = useRef(null)
   const [id, setId] = useState("")
   const [pw, setPw] = useState("")
   const [isShowPwChecked, setShowPwChecked] = useState(false)
   const [visibility, setVisibility] = useState("visibility")
-  console.log(userInfoSelector[0]);
-  console.log(authSelector);
 
-  let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+  const handleOnConfrimEmail = (confirmEmailInput) => {
+    setId(confirmEmailInput)
+  }
 
-  let testEmails = ["aaa@aa.aa"];
+  const doesEmailMatch = () => {
+    let regex = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+    return regex.test(id) === true
+  }
 
-  testEmails.forEach((address) => {
-    console.log(regex.test(address));
-  });
+  const renderFeedbackEmail = () => {
 
+    if (id) {
+      if (!doesEmailMatch()) {
+        return (
+          <small id="emailHelp" className={`text-danger`}>
+            <span>조건에 맞게 입력해주세요.</span>
+            <div className="material-symbols-outlined" onClick={() => setId("")} id="check_danger">Close</div>
+          </small>)
+      }
+    }
+
+  }
 
   const toggleLogin = (e) => {
     e.preventDefault();
@@ -86,8 +97,9 @@ const LoginPage = () => {
           <div className="login_email">
 
             <TextInput type="text" id="email" name="email"
-              value={id} onChange={(e) => setId(e.target.value)} required />
+              value={id} onChange={(e) => handleOnConfrimEmail(e.target.value)} required />
             <Label htmlFor="email"><span>이메일</span></Label>
+            {renderFeedbackEmail()}
           </div>
           <div className="login_password">
 

@@ -2,7 +2,7 @@
 .login_password {
   position: relative;
   background-color: #e8f0fe;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   border-radius: 3px;
   display: flex;
   height: 50px;
@@ -80,6 +80,17 @@
   left: 65%;
 }
 
+#check_success {
+  color: yellowgreen;
+  font-size: 30px;
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 48;
+}
+
+#check_danger {
+  color: red;
+  font-size: 30px;
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 48;
+}
 @media (max-width: 992px) {
   .material-symbols-outlined {
     top: 10px;
