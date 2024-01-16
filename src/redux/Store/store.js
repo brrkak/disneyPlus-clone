@@ -4,6 +4,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import persistStore from "redux-persist/es/persistStore";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistReducer } from "redux-persist";
 import loginSlice from "../Slice/loginSlice";
+import profileImage from "../Slice/profileImage";
 
 const persistConfig = {
     key: "root",
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     login: loginSlice,
+    profile: profileImage,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

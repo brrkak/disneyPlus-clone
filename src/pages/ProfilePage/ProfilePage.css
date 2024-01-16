@@ -4,6 +4,35 @@
 .profile_id {
 }
 
+.profile_character {
+  position: absolute;
+  left: 450px;
+  top: 120px;
+}
+.profile_character_edit {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile_character_edit > img {
+  width: 80px;
+  height: 80px;
+  display: block;
+  object-fit: cover;
+}
+
+#profileImage_btn {
+  position: absolute;
+  top: 150px;
+  right: 50px;
+}
+
+.profile_image {
+  background-color: white;
+  width: 100px;
+  height: 100px;
+}
+
 .profile_userInfo {
   color: black;
   font-size: 20px;

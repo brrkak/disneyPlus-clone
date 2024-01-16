@@ -64,8 +64,3 @@ span {
   left: 0;
   color: greenyellow;
 }
-
-input[type="number"] {
-  -webkit-appearance: none;
-  margin: 0;
-}

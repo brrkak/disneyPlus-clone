@@ -2,22 +2,28 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
-import { memoLoginAuthSelector, memoLogoutSelector } from "../../redux/Selector/memoSelectors";
+import { memoLoginAuthSelector, memoLogoutSelector, memoProfileImageSelector } from "../../redux/Selector/memoSelectors";
 import { logout } from "../../redux/Slice/loginSlice";
 
 const Nav = () => {
-  const authSelector = useSelector(memoLoginAuthSelector)
-  const logoutSelector = useSelector(memoLogoutSelector)
+  const authSelector = useSelector(memoLoginAuthSelector);
+  const logoutSelector = useSelector(memoLogoutSelector);
+  const profileImageSelector = useSelector(memoProfileImageSelector)
+  const [profile, setProfile] = useState(false);
   const [show, setShow] = useState(false);
   // 창전환
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   //  useLocation을 통한 현재 경로나타내기
   const [searchValue, setSearchValue] = useState("");
   //  검색
   const navigate = useNavigate();
   // useNavigate를 이용한 경로찾기
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
+  // 프로필 사진 
+  const profileImage = () => {
+    return <img style={{ width: "50px", height: "50px" }} src={profileImageSelector} />
+  }
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -71,7 +77,7 @@ const Nav = () => {
             type="text"
             placeholder="검색해주세요"
           ></Input>
-            <div style={{ position: "fixed", right: "15%" }} onClick={() => navigate("/profile")}>프로필</div>
+            <div style={{ position: "fixed", right: "15%" }} onClick={() => navigate("/profile")}>{profileImage()}</div>
           </>
 
         ) : (

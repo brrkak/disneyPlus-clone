@@ -39,4 +39,9 @@ export const memoLogoutSelector = createSelector(
 export const memoLoginAuthSelector = createSelector(
     [commonSelector],
     (commonSelector) => commonSelector.login.isAuthenticated
-) 
+)
+
+export const memoProfileImageSelector = createSelector(
+    [commonSelector],
+    (commonSelector) => commonSelector.profile.upload
+)

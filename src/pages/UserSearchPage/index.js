@@ -58,7 +58,8 @@ const UserSearchPage = () => {
                         <Label htmlFor='name'><span>이름</span></Label>
                     </div>
                     <div className='userSearch_number'>
-                        <TextInput type="text" id='number' name='number' value={number} onChange={(e) => setNumber(e.target.value)} required />
+                        <TextInput type="number" id='number' name='number' value={number}
+                            onWheel={(e) => e.target.blur()} onChange={(e) => setNumber(e.target.value)} required />
                         <Label htmlFor='number'><span>전화번호</span></Label>
                     </div>
                 </form>
@@ -113,6 +114,9 @@ background-color: #ffffff;
 position: absolute;
 top:50px;
 `
-const TextInput = styled.input``
+const TextInput = styled.input`
+margin: 0;
+appearance: none;
+-webkit-appearance: none;`
 
 const Label = styled.label``

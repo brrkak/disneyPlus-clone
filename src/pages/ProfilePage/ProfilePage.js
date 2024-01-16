@@ -1,18 +1,24 @@
-import { useSelector } from 'react-redux'
-import { memoIdSelector, memoNameSelector, memoNumberSelector, memoPwSelector } from '../../redux/Selector/memoSelectors'
+import { useDispatch, useSelector } from 'react-redux'
+import { memoIdSelector, memoNameSelector, memoNumberSelector, memoProfileImageSelector, memoPwSelector } from '../../redux/Selector/memoSelectors'
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import "./ProfilePage.css"
+import { upload } from '../../redux/Slice/profileImage';
+
+
 const ProfilePage = () => {
     const [show, setShow] = useState(false)
+    const [profile, setProfile] = useState(false)
     const [pw, setPw] = useState("")
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const idSelector = useSelector(memoIdSelector);
     const pwSelector = useSelector(memoPwSelector);
     const nameSelector = useSelector(memoNameSelector)
     const numberSelector = useSelector(memoNumberSelector)
+    const profileImageSelector = useSelector(memoProfileImageSelector)
 
     const handleEditProfile = (e) => {
         e.preventDefault();
@@ -23,6 +29,13 @@ const ProfilePage = () => {
             alert("비밀번호가 다릅니다.")
         }
     }
+    const handleProfileImage = (e) => {
+        // 사진들의 각각의 이미지 소스 dispatch
+        return (
+            dispatch(upload(e.target.src)),
+            setProfile(false)
+        )
+    }
 
 
     return (show ?
@@ -31,7 +44,7 @@ const ProfilePage = () => {
                 <h2 className='heading_title'>비밀번호를 한번 더 입력해주세요.</h2>
                 <form className='profile_passwordConfirm_container' onSubmit={(e) => handleEditProfile(e)}>
                     <div className="profile_passwordConfirm">
-                        <TextInput id='password' name='password' value={pw} onChange={(e) => setPw(e.target.value)} type="text" required />
+                        <TextInput id='password' name='password' value={pw} onChange={(e) => setPw(e.target.value)} type="password" required />
                         <Label htmlFor="password"><span>비밀번호</span></Label>
                     </div>
                     <button className='profile_edit_btn' onSubmit={(e) => handleEditProfile(e)}>확인</button>
@@ -57,7 +70,26 @@ const ProfilePage = () => {
                     <div className="profile_id">
                         <div className='profile_userInfo'>ID : <span>{idSelector}</span></div>
                     </div>
+
+                    {/* 프로필 사진  */}
+                    <div className='profile_character'>
+                        {profile ? (
+                            <div className='profile_character_edit'>
+                                <img onClick={(e) => handleProfileImage(e)} src="/profile/profileImage1.svg" alt="char1" />
+                                <img onClick={(e) => handleProfileImage(e)} src="/profile/profileImage2.svg" alt="char2" />
+                                <img onClick={(e) => handleProfileImage(e)} src="/profile/profileImage3.svg" alt="char3" />
+                                <img onClick={(e) => handleProfileImage(e)} src="/profile/profileImage4.svg" alt="char4" />
+                                <img onClick={(e) => handleProfileImage(e)} src="/profile/profileImage5.svg" alt="char5" />
+                                <img onClick={(e) => handleProfileImage(e)} src="/profile/profileImage6.svg" alt="char6" />
+                            </div>
+                        ) :
+                            (<div>
+                                <img onClick={() => setProfile(true)} src={profileImageSelector} />
+                            </div>)}
+                    </div>
                 </Profile>
+
+
                 <button className='profile_edit_btn' onClick={() => setShow(true)}>프로필 수정</button>
                 <div className='back_btn' id='profile_passwordConfirm_back' s onClick={() => navigate("/main")}>
                     <span className='material-symbols-outlined'></span>
@@ -113,6 +145,7 @@ padding: 20px;`
 const TextInput = styled.input``
 
 const Label = styled.label``
+
 
 
 export default ProfilePage

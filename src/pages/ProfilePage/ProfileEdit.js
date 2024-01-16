@@ -151,5 +151,8 @@ top:50px;
 
 const Profile = styled.div``
 
-const TextInput = styled.input``
+const TextInput = styled.input`
+margin: 0;
+appearance: none;
+-webkit-appearance: none;`
 const Label = styled.label``

@@ -45,16 +45,16 @@
 }
 
 .profileDel_container > div > input:valid,
-.profileEdit_container > div > input:focus,
-.profileDel_container > div > input:valid,
-.profileEdit_container > div > input:valid {
+.profileDel_container > div > input:focus,
+.profileEdit_container > div > input:valid,
+.profileEdit_container > div > input:focus {
   transition: border-bottom 0.5s ease;
   border-bottom: 2px solid rgb(37, 37, 38);
 }
 
 .profileDel_container > div > input:focus + label span,
+.profileDel_container > div > input:valid + label span,
 .profileEdit_container > div > input:focus + label span,
-.profileDel_container > div > input:focus + label span,
 .profileEdit_container > div > input:valid + label span {
   display: block;
   transform: translateY(-100%);
@@ -63,8 +63,8 @@
 }
 
 .profileDel_container > div > input + label span,
-.profileEdit_container > div > input + label span,
 .profileDel_container > div > input + label span,
+.profileEdit_container > div > input + label span,
 .profileEdit_container > div > input + label span {
   display: block;
   transition: all 0.3s ease;

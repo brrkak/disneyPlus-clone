@@ -18,6 +18,7 @@ const SignUpPage = () => {
     const [confirmPw, setConfirmPw] = useState("")
     const [passwordScore, setPasswordScore] = useState("")
     const infoSel = useSelector(memoUserInfoSelector)
+    let regPassword = new RegExp(/^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/);
 
     // 이메일 입력
     const handleOnConfrimEmail = (confirmEmailInput) => {
@@ -27,8 +28,8 @@ const SignUpPage = () => {
 
     const doesEmailMatch = () => {
         // 이메일 유효성검사.
-        let regex = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
-        return regex.test(id) === true
+        let regEmail = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+        return regEmail.test(id) === true
     }
 
     const renderFeedbackEmail = () => {
@@ -71,14 +72,15 @@ const SignUpPage = () => {
         setPasswordScore(score)
     }
 
+
     // 패스워드 확인 입력
     const handleOnConfirmPasswordInput = (confirmPasswordInput) => {
         setConfirmPw(confirmPasswordInput);
     }
     // 패스워드와 패스워드 확인 일치여부
     const doesPasswordMatch = () => {
-        return pw === confirmPw
 
+        return pw === confirmPw
     }
 
     //  패스워드 확인 피드백
@@ -123,6 +125,9 @@ const SignUpPage = () => {
                 return (
                     <span className='signUp_confirmPw_rejcet'>패스워드 불일치</span>
                 )
+                // 패스워드 유효성 검사
+            } else if (regPassword.test(pw) === false) {
+                return <span className='signUp_confirmPw_rejcet'>영문 숫자 조합 8자리 이상 입력해주세요.</span>
             }
         }
     }

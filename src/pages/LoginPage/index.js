@@ -26,8 +26,8 @@ const LoginPage = () => {
   }
 
   const doesEmailMatch = () => {
-    let regex = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
-    return regex.test(id) === true
+    let regEmail = new RegExp(/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/);
+    return regEmail.test(id) === true
   }
 
   const renderFeedbackEmail = () => {
@@ -170,5 +170,7 @@ top:50px;
 const Label = styled.label``
 
 const TextInput = styled.input`
-
+margin: 0;
+appearance: none;
+-webkit-appearance: none;
   `

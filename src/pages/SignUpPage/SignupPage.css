@@ -93,8 +93,10 @@
   top: 0;
 }
 .signUp_confirmPw_rejcet {
+  display: block;
+  width: 200px;
   position: absolute;
-  left: 450px;
+  left: 400px;
   top: 50px;
 }
 
