@@ -36,7 +36,7 @@ const UserSearchPage = () => {
             <img className="login_logo_img"
                 src="/images/logo.svg"
                 alt="Disney Plus App" />
-            <Contents>
+            <Contents className="contents_box">
                 {error ?
                     <div className='heading_title'> 유저의정보를 불러오지못했습니다.</div> :
                     <div className='userSearch_userInfo'>
@@ -50,7 +50,7 @@ const UserSearchPage = () => {
             <img className="login_logo_img"
                 src="/images/logo.svg"
                 alt="Disney Plus App" />
-            <Contents>
+            <Contents className="contents_box">
                 <h1 className='heading_title'>ID/PW찾기</h1>
                 <form className="userSearch_container" onSubmit={(e) => toggleSearch(e)}>
                     <div className='userSearch_name'>
@@ -107,7 +107,6 @@ align-items: center;
 const Contents = styled.div`
 
 border-radius: 24px 24px 24px 24px;
-width: 580px;
 margin: 100px 0 0 0;
 padding: 40px 72px 80px 72px;
 background-color: #ffffff;

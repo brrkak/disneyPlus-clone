@@ -31,14 +31,12 @@
   display: block;
   transform: translateY(-100%);
   transition: all 0.3s ease;
-  font-size: 14px;
 }
 
 .userSearch_container > div > input + label span,
 .userSearch_container > div > input + label span {
   display: block;
   transition: all 0.3s ease;
-  font-size: 20px;
 }
 
 .userSearch_userInfo {

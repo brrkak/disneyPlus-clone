@@ -35,14 +35,12 @@
   display: block;
   transform: translateY(-100%);
   transition: all 0.3s ease;
-  font-size: 14px;
 }
 
 .login_container > div > input + label span,
 .login_container > div > input + label span {
   display: block;
   transition: all 0.3s ease;
-  font-size: 20px;
 }
 
 .material-symbols-outlined {
@@ -75,9 +73,10 @@
 }
 
 .signup_btn {
+  display: contents;
   position: absolute;
   top: 20px;
-  left: 65%;
+  left: 55%;
 }
 
 #check_success {
@@ -90,10 +89,4 @@
   color: red;
   font-size: 30px;
   font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 48;
-}
-@media (max-width: 992px) {
-  .material-symbols-outlined {
-    top: 10px;
-    left: 80%;
-  }
 }

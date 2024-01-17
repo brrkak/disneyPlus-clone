@@ -91,7 +91,7 @@ const LoginPage = () => {
       <img className="login_logo_img"
         src="/images/logo.svg"
         alt="Disney Plus App" />
-      <Contents>
+      <Contents className="contents_box">
         <h1 className="heading_title">로그인</h1>
         <form className="login_container" onSubmit={(e) => toggleLogin(e)}>
           <div className="login_email">
@@ -159,7 +159,6 @@ align-items: center;
 const Contents = styled.div`
 
 border-radius: 24px 24px 24px 24px;
-width: 580px;
 margin: 100px 0 0 0;
 padding: 40px 72px 80px 72px;
 background-color: #ffffff;

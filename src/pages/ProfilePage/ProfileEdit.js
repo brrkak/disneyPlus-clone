@@ -18,8 +18,7 @@ const ProfileEdit = () => {
     const renderFeedbackMessage = () => {
         if (name.length < 2) {
             return (
-                <div>조건에 맞게 입력하세요.</div>
-            )
+                <div className='text-danger'><span >조건에 맞게 입력하세요.</span></div>)
         } else {
             return null
         }
@@ -63,7 +62,7 @@ const ProfileEdit = () => {
     return (
         show ? (
             <Container>
-                <Contents>
+                <Contents className="contents_box">
                     <form className='profileDel_container' onSubmit={(e) => handleDel(e)}>
                         <div className='profileDel_number'>
                             <TextInput type="number" id='delNumber' name='delNumber' onWheel={(e) => e.target.blur()}
@@ -81,19 +80,19 @@ const ProfileEdit = () => {
                     </form>
                 </Contents>
             </Container>) :
-            (<Container>
-                <Contents>
+            (<Container >
+                <Contents className="contents_box">
                     <h1 className='heading_title'> 프로필 수정 </h1>
-                    {renderFeedbackMessage()}
                     <Profile>
                         <form className='profileEdit_container' onSubmit={(e) => handleEdit(e)}>
                             <div className='profileEdit_name'>
                                 <TextInput id='name' name="name" type="text"
                                     value={name} onChange={(e) => setName(e.target.value)} required />
                                 <Label htmlFor="name"><span>이름을 최소 두글자 입력하세요.</span></Label>
+                                {renderFeedbackMessage()}
                             </div>
                             <div className='profileEdit_password'>
-                                <TextInput id='password' name="password" type="number"
+                                <TextInput id='password' name="password" type="password"
                                     onWheel={((e) => e.target.blur())}
                                     value={pw} onChange={(e) => setPw(e.target.value)} required />
                                 <Label htmlFor="password"><span>비밀번호를 다시 입력해주세요</span></Label>
@@ -141,7 +140,6 @@ align-items: center;
 const Contents = styled.div`
 
 border-radius: 24px 24px 24px 24px;
-width: 580px;
 margin: 100px 0 0 0;
 padding: 40px 72px 80px 72px;
 background-color: #ffffff;

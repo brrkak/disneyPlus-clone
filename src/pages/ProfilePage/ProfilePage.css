@@ -1,22 +1,29 @@
+.profile_character {
+  display: flex;
+  flex-direction: row;
+  background-color: #c9d6e9;
+  border-radius: 50%;
+}
 .profile_name,
-.profile_pw,
 .profile_number,
 .profile_id {
 }
 
-.profile_character {
-  position: absolute;
-  left: 450px;
-  top: 120px;
+.profile_character_current {
+  position: relative;
 }
+
 .profile_character_edit {
   display: flex;
   flex-wrap: wrap;
 }
 
 .profile_character_edit > img {
-  width: 80px;
-  height: 80px;
+  display: block;
+  object-fit: cover;
+}
+
+.profile_character_current > img {
   display: block;
   object-fit: cover;
 }
@@ -89,18 +96,64 @@
   display: block;
   transform: translateY(-100%);
   transition: all 0.3s ease;
-  font-size: 14px;
 }
 
 .profile_passwordConfirm_container > div > input + label span,
 .profile_passwordConfirm_container > div > input + label span {
   display: block;
   transition: all 0.3s ease;
-  font-size: 20px;
 }
 
 #profile_passwordConfirm_back {
   position: absolute;
   top: 0;
   left: 15px;
+}
+
+@media (min-width: 320px) {
+  .profile_userInfo {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 640px) {
+  .profile_userInfo {
+    font-size: 13px;
+  }
+}
+
+@media (min-width: 768px) {
+  .profile_userInfo {
+    font-size: 15px;
+  }
+
+  .profile_character_current > img {
+    width: 100px;
+    height: 100px;
+  }
+  .profile_character {
+    width: 100px;
+    height: 100px;
+  }
+  /* .icon_edit {
+    position: absolute;
+    top: 70px;
+    right: 110px;
+  } */
+}
+
+@media (min-width: 1024px) {
+  .profile_userInfo {
+    font-size: 20px;
+  }
+
+  .profile_character_current > img {
+    width: 200px;
+    height: 200px;
+  }
+
+  .profile_character {
+    width: 200px;
+    height: 200px;
+  }
 }

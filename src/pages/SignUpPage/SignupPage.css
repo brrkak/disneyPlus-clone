@@ -66,14 +66,12 @@
   display: block;
   transform: translateY(-100%);
   transition: all 0.3s ease;
-  font-size: 14px;
 }
 
 .signUp_container > div > input + label span,
 .signUp_container > div > input + label span {
   display: block;
   transition: all 0.3s ease;
-  font-size: 20px;
 }
 
 .signUp_container > .signUp_userInfo > div > input {

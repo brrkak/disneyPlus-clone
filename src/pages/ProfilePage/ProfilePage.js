@@ -40,7 +40,7 @@ const ProfilePage = () => {
 
     return (show ?
         (<Container>
-            <Contents>
+            <Contents className="contents_box">
                 <h2 className='heading_title'>비밀번호를 한번 더 입력해주세요.</h2>
                 <form className='profile_passwordConfirm_container' onSubmit={(e) => handleEditProfile(e)}>
                     <div className="profile_passwordConfirm">
@@ -58,19 +58,9 @@ const ProfilePage = () => {
 
         </Container>)
         : (<Container>
-            <Contents>
+            <Contents className="contents_box">
                 <h1 className='heading_title'>프로필 정보</h1>
                 <Profile>
-                    <div className="profile_name" >
-                        <div className='profile_userInfo'>NAME : <span>{nameSelector}</span></div>
-                    </div >
-                    <div className="profile_number">
-                        <div className='profile_userInfo'>NUMBER : <span>{numberSelector}</span></div>
-                    </div>
-                    <div className="profile_id">
-                        <div className='profile_userInfo'>ID : <span>{idSelector}</span></div>
-                    </div>
-
                     {/* 프로필 사진  */}
                     <div className='profile_character'>
                         {profile ? (
@@ -83,11 +73,25 @@ const ProfilePage = () => {
                                 <img onClick={(e) => handleProfileImage(e)} src="/profile/profileImage6.svg" alt="char6" />
                             </div>
                         ) :
-                            (<div>
-                                <img onClick={() => setProfile(true)} src={profileImageSelector} />
+                            (<div className='profile_character_current'>
+                                <img src={profileImageSelector} />
+                                <div className='icon_edit'>
+                                    <span onClick={() => setProfile(true)} class="material-symbols-outlined"> edit </span>
+                                </div>
                             </div>)}
                     </div>
+                    <div className="profile_name" >
+                        <div className='profile_userInfo'>NAME : <span>{nameSelector}</span></div>
+                    </div >
+                    <div className="profile_number">
+                        <div className='profile_userInfo'>NUMBER : <span>{numberSelector}</span></div>
+                    </div>
+                    <div className="profile_id">
+                        <div className='profile_userInfo'>ID : <span>{idSelector}</span></div>
+                    </div>
+
                 </Profile>
+
 
 
                 <button className='profile_edit_btn' onClick={() => setShow(true)}>프로필 수정</button>
@@ -128,7 +132,6 @@ align-items: center;
 const Contents = styled.div`
 
 border-radius: 24px 24px 24px 24px;
-width: 580px;
 margin: 100px 0 0 0;
 padding: 40px 72px 80px 72px;
 background-color: #ffffff;
@@ -141,7 +144,8 @@ display: flex;
 flex-direction: column;
 background-color: #e8f0fe;
 border-radius: 10px;
-padding: 20px;`
+padding: 20px;
+align-items: center;`
 const TextInput = styled.input``
 
 const Label = styled.label``
