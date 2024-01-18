@@ -12,6 +12,9 @@
 }
 
 .banner__title {
+  display: block;
+  max-width: 500px;
+  min-width: 300px;
   font-size: 3rem;
   font-weight: 800;
   padding-bottom: 0.5rem;

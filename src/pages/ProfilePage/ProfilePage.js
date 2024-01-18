@@ -30,6 +30,7 @@ const ProfilePage = () => {
         }
     }
     const handleProfileImage = (e) => {
+
         // 사진들의 각각의 이미지 소스 dispatch
         return (
             dispatch(upload(e.target.src)),
@@ -76,7 +77,8 @@ const ProfilePage = () => {
                             (<div className='profile_character_current'>
                                 <img src={profileImageSelector} />
                                 <div className='icon_edit'>
-                                    <span onClick={() => setProfile(true)} class="material-symbols-outlined"> edit </span>
+                                    <span onClick={() => setProfile(true)} class="material-symbols-outlined"
+                                        id='profile_editBtn'>edit</span>
                                 </div>
                             </div>)}
                     </div>

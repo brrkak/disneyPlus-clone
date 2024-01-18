@@ -77,7 +77,7 @@ const Nav = () => {
             type="text"
             placeholder="검색해주세요"
           ></Input>
-            <div style={{ position: "fixed", right: "15%" }} onClick={() => navigate("/profile")}>{profileImage()}</div>
+            <div style={{ position: "fixed", right: "200px" }} onClick={() => navigate("/profile")}>{profileImage()}</div>
           </>
 
         ) : (

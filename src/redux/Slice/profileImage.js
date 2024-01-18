@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-    upload: "",
+    upload: "프로필",
 }
 
 

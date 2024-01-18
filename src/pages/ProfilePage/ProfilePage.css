@@ -114,11 +114,33 @@
   .profile_userInfo {
     font-size: 10px;
   }
+  .profile_character_current > img {
+    width: 40px;
+    height: 40px;
+  }
+  .profile_character {
+    width: 40px;
+    height: 40px;
+  }
+  #profile_editBtn {
+    font-size: 10px;
+  }
 }
 
 @media (min-width: 640px) {
   .profile_userInfo {
     font-size: 13px;
+  }
+  .profile_character_current > img {
+    width: 80px;
+    height: 80px;
+  }
+  .profile_character {
+    width: 80px;
+    height: 80px;
+  }
+  #profile_editBtn {
+    font-size: 15px;
   }
 }
 
@@ -135,11 +157,9 @@
     width: 100px;
     height: 100px;
   }
-  /* .icon_edit {
-    position: absolute;
-    top: 70px;
-    right: 110px;
-  } */
+  #profile_editBtn {
+    font-size: 20px;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -155,5 +175,8 @@
   .profile_character {
     width: 200px;
     height: 200px;
+  }
+  #profile_editBtn {
+    font-size: 40px;
   }
 }
