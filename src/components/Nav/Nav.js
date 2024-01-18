@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { memoLoginAuthSelector, memoLogoutSelector, memoProfileImageSelector } from "../../redux/Selector/memoSelectors";
 import { logout } from "../../redux/Slice/loginSlice";
+import "./Nav.css"
 
 const Nav = () => {
   const authSelector = useSelector(memoLoginAuthSelector);
@@ -22,7 +23,7 @@ const Nav = () => {
 
   // 프로필 사진 
   const profileImage = () => {
-    return <img style={{ width: "50px", height: "50px" }} src={profileImageSelector} />
+    return <img className="main_profile_character" src={profileImageSelector} />
   }
 
   useEffect(() => {
@@ -70,20 +71,24 @@ const Nav = () => {
           />
         </Logo>
         {authSelector ? (
-          <><Input
-            value={searchValue}
-            onChange={handleChange}
-            className="nav__input"
-            type="text"
-            placeholder="검색해주세요"
-          ></Input>
-            <div style={{ position: "fixed", right: "200px" }} onClick={() => navigate("/profile")}>{profileImage()}</div>
-          </>
+          <div className="main_nav">
+            <Input
+              value={searchValue}
+              onChange={handleChange}
+              className="main_search"
+              type="text"
+              placeholder="검색해주세요" />
+            <div className="main_profile" onClick={() => navigate("/profile")}>
+              {profileImage()}
+            </div>
+          </div>
 
         ) : (
           null
         )}
-        <div>{authSelector ? <Login onClick={toggleLogout}>Logout</Login> : <Login onClick={() => navigate("/login")}>Login</Login>} </div>
+        <div className="main_login_btn">{authSelector ?
+          <Login onClick={toggleLogout}>Logout</Login> :
+          <Login onClick={() => navigate("/login")}>Login</Login>} </div>
       </NavWrapper>
 
     </Container>
@@ -117,7 +122,8 @@ const Input = styled.input`
   background-color: rgba(0, 0, 0, 0.582);
   border-radius: 5px;
   color: white;
-  padding: 5px;
+  margin-top: .5%;  
+  padding: 10px;
   border: 1px solid lightgray;
 `;
 

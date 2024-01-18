@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { creatApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
+
+
 
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
     isAuthenticated: false,
     error: null,
 }
+
 
 
 
