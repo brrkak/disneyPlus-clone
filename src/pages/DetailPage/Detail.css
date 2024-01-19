@@ -1,0 +1,6 @@
+.detail_closeBtn {
+}
+.detail_closeBtn > .material-symbols-rounded::after {
+  content: "close";
+  color: white;
+}

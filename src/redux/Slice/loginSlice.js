@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { userApi } from "../Service/createApi";
 
 
 
@@ -101,6 +101,16 @@ const loginSlice = createSlice({
 
 
     },
+    extraReducers: (builder) => {
+        builder.addMatcher(userApi.endpoints.login.matchFulfilled, (state, action) => {
+            state.userInfo = action.payload
+            state.error = action.payload
+        })
+            .addMatcher(userApi.endpoints.login.matchRejected, (state, action) => {
+                state.userInfo = null;
+                state.error = action.payload
+            })
+    }
 
 })
 

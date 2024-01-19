@@ -3,10 +3,11 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
 export const userApi = createApi({
     reducerPath: `api`,
     baseQuery: fetchBaseQuery({ baseUrl: "localhost:3000" }),
-
+    tagTypes: ['User'],
     endpoints: (builder) => ({
         login: builder.query({
             query: () => 'login',
+
 
         }),
     }),

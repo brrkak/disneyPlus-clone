@@ -23,7 +23,7 @@ const Nav = () => {
 
   // 프로필 사진 
   const profileImage = () => {
-    return <img className="main_profile_character" src={profileImageSelector} />
+    return <img className="main_profile_character" alt="프로필사진" src={profileImageSelector} />
   }
 
   useEffect(() => {

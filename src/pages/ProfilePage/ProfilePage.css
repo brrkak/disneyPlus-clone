@@ -16,11 +16,15 @@
 .profile_character_edit {
   display: flex;
   flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
 }
 
 .profile_character_edit > img {
   display: block;
   object-fit: cover;
+  width: 30%;
+  height: 30%;
 }
 
 .profile_character_current > img {
