@@ -24,16 +24,14 @@ const MovieModal = ({
             onClick={useOnClickOutside(ref, () => {
               setModalOpen(false);
             })}
-            className="modal__close"
-          >
+            className="modal__close">
             X
           </span>
 
           <img
             src={`https://image.tmdb.org/t/p/original/${backdrop_path}`}
             alt="modal__poster-img"
-            className="modal__poster-img"
-          />
+            className="modal__poster-img" />
 
           <div className="modal__content">
             <p className="modal__details">

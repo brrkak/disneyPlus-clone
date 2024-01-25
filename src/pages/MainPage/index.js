@@ -12,6 +12,7 @@ const MainPage = () => {
     <Container>
       <Banner />
       <Category />
+      <Row title="Now Playing" id="NP" fetchUrl={requests.fetchNowPlaying} />
       <Row title="Trending Now" id="TN" fetchUrl={requests.fetchTrending} />
       <Row title="Top Rated" id="TR" fetchUrl={requests.fetchTopRated} />
       <Row
@@ -24,6 +25,22 @@ const MainPage = () => {
         id="CM"
         fetchUrl={requests.fetchComedyMovies}
       />
+      <Row
+        title="Documentaries"
+        id="DM"
+        fetchUrl={requests.fetchDocumentaries}
+      />
+      <Row
+        title="Romance Movies"
+        id="RM"
+        fetchUrl={requests.fetchRomanceMovies}
+      />
+      <Row
+        title="Horror Movies"
+        id="HM"
+        fetchUrl={requests.fetchHorrorMovies}
+      />
+
     </Container>
   );
 };

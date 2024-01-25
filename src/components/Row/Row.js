@@ -18,7 +18,7 @@ const Row = ({ title, fetchUrl }) => {
   // useCallback을 써서 fetchUrl이 바뀔때만 새로 생성
   const fetchMovieData = useCallback(async () => {
     const response = await axiosInstance.get(fetchUrl);
-    // console.log(response);
+    console.log(response);
     setMovies(response.data.results);
   }, [fetchUrl]);
 
